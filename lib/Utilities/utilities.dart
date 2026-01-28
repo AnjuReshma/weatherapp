@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 class Utilities {
-  static Map<dynamic, String> imageMap = {
+   Map<dynamic, String> imageMap = {
     'Partially cloudy': 'assets/images/nightRain.png',
     'Overcast': 'assets/images/sunSlowRain.png',
     'Clear': 'assets/images/wind.png',

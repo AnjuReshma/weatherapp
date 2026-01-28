@@ -14,8 +14,8 @@ class InternetException extends AppExceptions {
   InternetException([String? message]) : super(message, 'Internet Error Issues');
 }
 
-class RequestTimeoutException extends AppExceptions {
-  RequestTimeoutException([String? message]) : super(message, 'The request has timed out');
+class RequestTimeout extends AppExceptions {
+  RequestTimeout([String? message]) : super(message, 'The request has timed out');
 }
 
 class ServerError extends AppExceptions {
