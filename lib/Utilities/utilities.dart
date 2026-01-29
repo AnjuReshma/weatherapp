@@ -28,7 +28,7 @@ class Utilities {
 
   static String formatTime(String time) {
     DateFormat dateFormat = DateFormat('hh:mm a');
-    DateTime dateTime = DateTime.parse(time);
+    DateTime dateTime = DateTime.parse('2023-08-08T$time');
     String timeIn12HourFormat = dateFormat.format(dateTime);
     return timeIn12HourFormat;
   }
@@ -42,14 +42,14 @@ class Utilities {
 
   static String formatTimeWithoutAmPm(String time) {
     DateFormat dateFormat = DateFormat('hh:mm');
-    DateTime dateTime = DateTime.parse(time);
+    DateTime dateTime = DateTime.parse('2023-08-08T$time');
     String timeIn24HourFormat = dateFormat.format(dateTime);
     return timeIn24HourFormat;
   }
 
   static bool checkTime(String time) {
     DateFormat dateFormat = DateFormat('hh a');
-    DateTime dateTime = DateTime.parse(time);
+    DateTime dateTime = DateTime.parse('2023-08-08T$time');
     DateTime now = DateTime.now();
     return dateFormat.format(dateTime) == dateFormat.format(now);
   }

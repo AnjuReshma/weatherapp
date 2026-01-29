@@ -1,26 +1,15 @@
 // ignore_for_file: constant_identifier_names
 
-import 'dart:convert';
-
-DataModel dataModelFromJson(String str) =>
-    DataModel.fromJson(json.decode(str));
-
-String dataModelToJson(DataModel data) =>
-    json.encode(data.toJson());
-
-/* =========================
-   MAIN DATA MODEL
-========================= */
-
 class DataModel {
-  int? queryCost;
-  double? latitude;
-  double? longitude;
-  String? resolvedAddress;
-  String? address;
-  String? timezone;
-  int? tzoffset;
-  String? description;
+  dynamic queryCost;
+  dynamic latitude;
+  dynamic longitude;
+  dynamic resolvedAddress;
+  dynamic address;
+  dynamic timezone;
+  dynamic tzoffset;
+  dynamic description;
+
   List<Days>? days;
   List<dynamic>? alerts;
   Stations? stations;
@@ -52,128 +41,56 @@ class DataModel {
         description: json["description"],
         days: json["days"] == null
             ? []
-            : List<Days>.from(
-                json["days"].map((x) => Days.fromJson(x))),
-        alerts: json["alerts"] == null
-            ? []
-            : List<dynamic>.from(json["alerts"]),
-        stations: json["stations"] == null
-            ? null
-            : Stations.fromJson(json["stations"]),
+            : List<Days>.from(json["days"].map((x) => Days.fromJson(x))),
+        alerts: json["alerts"] ?? [],
+        stations:
+            json["stations"] == null ? null : Stations.fromJson(json["stations"]),
         currentConditions: json["currentConditions"] == null
             ? null
             : CurrentConditions.fromJson(json["currentConditions"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "queryCost": queryCost,
-        "latitude": latitude,
-        "longitude": longitude,
-        "resolvedAddress": resolvedAddress,
-        "address": address,
-        "timezone": timezone,
-        "tzoffset": tzoffset,
-        "description": description,
-        "days": days == null
-            ? []
-            : List<dynamic>.from(days!.map((x) => x.toJson())),
-        "alerts": alerts == null ? [] : List<dynamic>.from(alerts!),
-        "stations": stations?.toJson(),
-        "currentConditions": currentConditions?.toJson(),
-      };
 }
 
-/* =========================
-   CURRENT CONDITIONS
-========================= */
 
-class CurrentConditions {
-  String? datetime;
-  int? datetimeEpoch;
-  double? temp;
-  double? feelslike;
-  double? humidity;
-  double? windspeed;
-  double? winddir;
-  double? pressure;
-  double? visibility;
-  double? cloudcover;
-  int? uvindex;
-  Conditions? conditions;
-  Icon? icon;
 
-  CurrentConditions({
-    this.datetime,
-    this.datetimeEpoch,
-    this.temp,
-    this.feelslike,
-    this.humidity,
-    this.windspeed,
-    this.winddir,
-    this.pressure,
-    this.visibility,
-    this.cloudcover,
-    this.uvindex,
-    this.conditions,
-    this.icon,
-  });
-
-  factory CurrentConditions.fromJson(Map<String, dynamic> json) =>
-      CurrentConditions(
-        datetime: json["datetime"],
-        datetimeEpoch: json["datetimeEpoch"],
-        temp: json["temp"]?.toDouble(),
-        feelslike: json["feelslike"]?.toDouble(),
-        humidity: json["humidity"]?.toDouble(),
-        windspeed: json["windspeed"]?.toDouble(),
-        winddir: json["winddir"]?.toDouble(),
-        pressure: json["pressure"]?.toDouble(),
-        visibility: json["visibility"]?.toDouble(),
-        cloudcover: json["cloudcover"]?.toDouble(),
-        uvindex: json["uvindex"],
-        conditions: conditionsValues.map[json["conditions"]],
-        icon: iconValues.map[json["icon"]],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "datetime": datetime,
-        "datetimeEpoch": datetimeEpoch,
-        "temp": temp,
-        "feelslike": feelslike,
-        "humidity": humidity,
-        "windspeed": windspeed,
-        "winddir": winddir,
-        "pressure": pressure,
-        "visibility": visibility,
-        "cloudcover": cloudcover,
-        "uvindex": uvindex,
-        "conditions": conditionsValues.reverse[conditions],
-        "icon": iconValues.reverse[icon],
-      };
-}
-
-/* =========================
-   DAYS (DAILY WEATHER)
-========================= */
 
 class Days {
-  String? datetime;
-  int? datetimeEpoch;
-  double? tempmax;
-  double? tempmin;
-  double? temp;
-  double? humidity;
-  double? precip;
-  double? precipprob;
-  List<Icon>? preciptype;
-  double? windspeed;
-  double? winddir;
-  double? pressure;
-  double? cloudcover;
-  int? uvindex;
-  Conditions? conditions;
-  Icon? icon;
-  String? description;
+  dynamic datetime;
+  dynamic datetimeEpoch;
+  dynamic tempmax;
+  dynamic tempmin;
+  dynamic temp;
+  dynamic feelslikemax;
+  dynamic feelslikemin;
+  dynamic feelslike;
+  dynamic dew;
+  dynamic humidity;
+  dynamic precip;
+  dynamic precipprob;
+  dynamic precipcover;
+  List<dynamic>? preciptype;
+  dynamic snow;
+  dynamic snowdepth;
+  dynamic windgust;
+  dynamic windspeed;
+  dynamic winddir;
+  dynamic pressure;
+  dynamic cloudcover;
+  dynamic visibility;
+  dynamic solarradiation;
+  dynamic solarenergy;
+  dynamic uvindex;
+  dynamic severerisk;
+  dynamic sunrise;
+  dynamic sunriseEpoch;
+  dynamic sunset;
+  dynamic sunsetEpoch;
+  dynamic moonphase;
+  dynamic conditions;
+  dynamic description;
+  dynamic icon;
+  List<dynamic>? stations;
+  dynamic source;
   List<Hours>? hours;
 
   Days({
@@ -182,18 +99,37 @@ class Days {
     this.tempmax,
     this.tempmin,
     this.temp,
+    this.feelslikemax,
+    this.feelslikemin,
+    this.feelslike,
+    this.dew,
     this.humidity,
     this.precip,
     this.precipprob,
+    this.precipcover,
     this.preciptype,
+    this.snow,
+    this.snowdepth,
+    this.windgust,
     this.windspeed,
     this.winddir,
     this.pressure,
     this.cloudcover,
+    this.visibility,
+    this.solarradiation,
+    this.solarenergy,
     this.uvindex,
+    this.severerisk,
+    this.sunrise,
+    this.sunriseEpoch,
+    this.sunset,
+    this.sunsetEpoch,
+    this.moonphase,
     this.conditions,
-    this.icon,
     this.description,
+    this.icon,
+    this.stations,
+    this.source,
     this.hours,
   });
 
@@ -203,74 +139,78 @@ class Days {
         tempmax: json["tempmax"]?.toDouble(),
         tempmin: json["tempmin"]?.toDouble(),
         temp: json["temp"]?.toDouble(),
+        feelslikemax: json["feelslikemax"]?.toDouble(),
+        feelslikemin: json["feelslikemin"]?.toDouble(),
+        feelslike: json["feelslike"]?.toDouble(),
+        dew: json["dew"]?.toDouble(),
         humidity: json["humidity"]?.toDouble(),
         precip: json["precip"]?.toDouble(),
         precipprob: json["precipprob"]?.toDouble(),
+        precipcover: json["precipcover"]?.toDouble(),
         preciptype: json["preciptype"] == null
             ? []
             : List<Icon>.from(
-                json["preciptype"].map((x) => iconValues.map[x])),
+                json["preciptype"].map((x) => iconValues.map[x]!)),
+        snow: json["snow"]?.toDouble(),
+        snowdepth: json["snowdepth"]?.toDouble(),
+        windgust: json["windgust"]?.toDouble(),
         windspeed: json["windspeed"]?.toDouble(),
         winddir: json["winddir"]?.toDouble(),
         pressure: json["pressure"]?.toDouble(),
         cloudcover: json["cloudcover"]?.toDouble(),
-        uvindex: json["uvindex"],
-        conditions: conditionsValues.map[json["conditions"]],
-        icon: iconValues.map[json["icon"]],
+        visibility: json["visibility"]?.toDouble(),
+        solarradiation: json["solarradiation"]?.toDouble(),
+        solarenergy: json["solarenergy"]?.toDouble(),
+        uvindex: json["uvindex"]?.toDouble(),
+        severerisk: json["severerisk"]?.toDouble(),
+        sunrise: json["sunrise"],
+        sunriseEpoch: json["sunriseEpoch"],
+        sunset: json["sunset"],
+        sunsetEpoch: json["sunsetEpoch"],
+        moonphase: json["moonphase"]?.toDouble(),
+        conditions: json["conditions"],
         description: json["description"],
+        icon: iconValues.map[json["icon"]],
+        stations: json["stations"] == null
+            ? []
+            : List<Station>.from(
+                json["stations"].map((x) => stationValues.map[x]!)),
+        source: sourceValues.map[json["source"]],
         hours: json["hours"] == null
             ? []
-            : List<Hours>.from(
-                json["hours"].map((x) => Hours.fromJson(x))),
+            : List<Hours>.from(json["hours"].map((x) => Hours.fromJson(x))),
       );
-
-  Map<String, dynamic> toJson() => {
-        "datetime": datetime,
-        "datetimeEpoch": datetimeEpoch,
-        "tempmax": tempmax,
-        "tempmin": tempmin,
-        "temp": temp,
-        "humidity": humidity,
-        "precip": precip,
-        "precipprob": precipprob,
-        "preciptype": preciptype == null
-            ? []
-            : List<dynamic>.from(
-                preciptype!.map((x) => iconValues.reverse[x])),
-        "windspeed": windspeed,
-        "winddir": winddir,
-        "pressure": pressure,
-        "cloudcover": cloudcover,
-        "uvindex": uvindex,
-        "conditions": conditionsValues.reverse[conditions],
-        "icon": iconValues.reverse[icon],
-        "description": description,
-        "hours": hours == null
-            ? []
-            : List<dynamic>.from(hours!.map((x) => x.toJson())),
-      };
 }
 
-/* =========================
-   HOURS (HOURLY WEATHER)
-========================= */
+
+
 
 class Hours {
-  String? datetime;
-  int? datetimeEpoch;
-  double? temp;
-  double? feelslike;
-  double? humidity;
-  double? precip;
-  double? precipprob;
-  List<Icon>? preciptype;
-  double? windspeed;
-  double? winddir;
-  double? pressure;
-  double? cloudcover;
-  int? uvindex;
-  Conditions? conditions;
-  Icon? icon;
+  dynamic datetime;
+  dynamic datetimeEpoch;
+  dynamic temp;
+  dynamic feelslike;
+  dynamic humidity;
+  dynamic dew;
+  dynamic precip;
+  dynamic precipprob;
+  dynamic snow;
+  dynamic snowdepth;
+  List<dynamic>? preciptype;
+  dynamic windgust;
+  dynamic windspeed;
+  dynamic winddir;
+  dynamic pressure;
+  dynamic visibility;
+  dynamic cloudcover;
+  dynamic solarradiation;
+  dynamic solarenergy;
+  dynamic uvindex;
+  dynamic severerisk;
+  dynamic conditions;
+  dynamic icon;
+  List<dynamic>? stations;
+  dynamic source;
 
   Hours({
     this.datetime,
@@ -278,16 +218,26 @@ class Hours {
     this.temp,
     this.feelslike,
     this.humidity,
+    this.dew,
     this.precip,
     this.precipprob,
+    this.snow,
+    this.snowdepth,
     this.preciptype,
+    this.windgust,
     this.windspeed,
     this.winddir,
     this.pressure,
+    this.visibility,
     this.cloudcover,
+    this.solarradiation,
+    this.solarenergy,
     this.uvindex,
+    this.severerisk,
     this.conditions,
     this.icon,
+    this.stations,
+    this.source,
   });
 
   factory Hours.fromJson(Map<String, dynamic> json) => Hours(
@@ -296,19 +246,139 @@ class Hours {
         temp: json["temp"]?.toDouble(),
         feelslike: json["feelslike"]?.toDouble(),
         humidity: json["humidity"]?.toDouble(),
+        dew: json["dew"]?.toDouble(),
         precip: json["precip"]?.toDouble(),
         precipprob: json["precipprob"]?.toDouble(),
+        snow: json["snow"]?.toDouble(),
+        snowdepth: json["snowdepth"]?.toDouble(),
         preciptype: json["preciptype"] == null
             ? []
             : List<Icon>.from(
-                json["preciptype"].map((x) => iconValues.map[x])),
+                json["preciptype"].map((x) => iconValues.map[x]!)),
+        windgust: json["windgust"]?.toDouble(),
         windspeed: json["windspeed"]?.toDouble(),
         winddir: json["winddir"]?.toDouble(),
         pressure: json["pressure"]?.toDouble(),
+        visibility: json["visibility"]?.toDouble(),
         cloudcover: json["cloudcover"]?.toDouble(),
-        uvindex: json["uvindex"],
-        conditions: conditionsValues.map[json["conditions"]],
+        solarradiation: json["solarradiation"]?.toDouble(),
+        solarenergy: json["solarenergy"]?.toDouble(),
+        uvindex: json["uvindex"]?.toDouble(),
+        severerisk: json["severerisk"]?.toDouble(),
+        conditions: json["conditions"],
         icon: iconValues.map[json["icon"]],
+        stations: json["stations"] == null
+            ? []
+            : List<Station>.from(
+                json["stations"].map((x) => stationValues.map[x]!)),
+        source: sourceValues.map[json["source"]],
+      );
+}
+
+
+
+
+
+class CurrentConditions {
+  dynamic datetime;
+  dynamic datetimeEpoch;
+  dynamic temp;
+  dynamic feelslike;
+  dynamic humidity;
+  dynamic dew;
+  double? precip;
+  dynamic precipprob;
+  dynamic snow;
+  dynamic snowdepth;
+  List<dynamic>? preciptype;
+  dynamic windgust;
+  dynamic windspeed;
+  dynamic winddir;
+  dynamic pressure;
+  dynamic visibility;
+  dynamic cloudcover;
+  dynamic solarradiation;
+  dynamic solarenergy;
+  dynamic uvindex;
+  dynamic conditions;
+  dynamic icon;
+  List<dynamic>? stations;
+  dynamic source;
+  dynamic sunrise;
+  dynamic sunriseEpoch;
+  dynamic sunset;
+  dynamic sunsetEpoch;
+  dynamic moonphase;
+
+  CurrentConditions({
+    this.datetime,
+    this.datetimeEpoch,
+    this.temp,
+    this.feelslike,
+    this.humidity,
+    this.dew,
+    this.precip,
+    this.precipprob,
+    this.snow,
+    this.snowdepth,
+    this.preciptype,
+    this.windgust,
+    this.windspeed,
+    this.winddir,
+    this.pressure,
+    this.visibility,
+    this.cloudcover,
+    this.solarradiation,
+    this.solarenergy,
+    this.uvindex,
+    this.conditions,
+    this.icon,
+    this.stations,
+    this.source,
+    this.sunrise,
+    this.sunriseEpoch,
+    this.sunset,
+    this.sunsetEpoch,
+    this.moonphase,
+  });
+
+  factory CurrentConditions.fromJson(Map<String, dynamic> json) =>
+      CurrentConditions(
+        datetime: json["datetime"],
+        datetimeEpoch: json["datetimeEpoch"],
+        temp: json["temp"]?.toDouble(),
+        feelslike: json["feelslike"]?.toDouble(),
+        humidity: json["humidity"]?.toDouble(),
+        dew: json["dew"]?.toDouble(),
+        precip: json["precip"]?.toDouble(),
+        precipprob: json["precipprob"]?.toDouble(),
+        snow: json["snow"]?.toDouble(),
+        snowdepth: json["snowdepth"]?.toDouble(),
+        preciptype: json["preciptype"] == null
+            ? []
+            : List<Icon>.from(
+                json["preciptype"].map((x) => iconValues.map[x]!)),
+        windgust: json["windgust"]?.toDouble(),
+        windspeed: json["windspeed"]?.toDouble(),
+        winddir: json["winddir"]?.toDouble(),
+        pressure: json["pressure"]?.toDouble(),
+        visibility: json["visibility"]?.toDouble(),
+        cloudcover: json["cloudcover"]?.toDouble(),
+        solarradiation: json["solarradiation"]?.toDouble(),
+        solarenergy: json["solarenergy"]?.toDouble(),
+        uvindex: json["uvindex"]?.toDouble(),
+        conditions: json["conditions"],
+        icon: iconValues.map[json["icon"]],
+        stations: json["stations"] == null
+            ? []
+            : List<Station>.from(
+                json["stations"].map((x) => stationValues.map[x]!)),
+        source: sourceValues.map[json["source"]],
+        sunrise: json["sunrise"],
+        sunriseEpoch: json["sunriseEpoch"],
+        sunset: json["sunset"],
+        sunsetEpoch: json["sunsetEpoch"],
+        moonphase: json["moonphase"]?.toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -317,41 +387,40 @@ class Hours {
         "temp": temp,
         "feelslike": feelslike,
         "humidity": humidity,
+        "dew": dew,
         "precip": precip,
         "precipprob": precipprob,
+        "snow": snow,
+        "snowdepth": snowdepth,
         "preciptype": preciptype == null
             ? []
             : List<dynamic>.from(
                 preciptype!.map((x) => iconValues.reverse[x])),
+        "windgust": windgust,
         "windspeed": windspeed,
         "winddir": winddir,
         "pressure": pressure,
+        "visibility": visibility,
         "cloudcover": cloudcover,
+        "solarradiation": solarradiation,
+        "solarenergy": solarenergy,
         "uvindex": uvindex,
-        "conditions": conditionsValues.reverse[conditions],
+        "conditions": conditions,
         "icon": iconValues.reverse[icon],
+        "stations": stations == null
+            ? []
+            : List<dynamic>.from(
+                stations!.map((x) => stationValues.reverse[x])),
+        "source": sourceValues.reverse[source],
+        "sunrise": sunrise,
+        "sunriseEpoch": sunriseEpoch,
+        "sunset": sunset,
+        "sunsetEpoch": sunsetEpoch,
+        "moonphase": moonphase,
       };
 }
 
-/* =========================
-   ENUMS & HELPERS
-========================= */
 
-enum Conditions {
-  CLEAR,
-  OVERCAST,
-  PARTIALLY_CLOUDY,
-  RAIN_OVERCAST,
-  RAIN_PARTIALLY_CLOUDY
-}
-
-final conditionsValues = EnumValues({
-  "Clear": Conditions.CLEAR,
-  "Overcast": Conditions.OVERCAST,
-  "Partially cloudy": Conditions.PARTIALLY_CLOUDY,
-  "Rain, Overcast": Conditions.RAIN_OVERCAST,
-  "Rain, Partially cloudy": Conditions.RAIN_PARTIALLY_CLOUDY,
-});
 
 enum Icon {
   CLEAR_DAY,
@@ -371,31 +440,32 @@ final iconValues = EnumValues({
   "rain": Icon.RAIN,
 });
 
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
+enum Source { COMB, FCST, OBS }
 
-  EnumValues(this.map);
+final sourceValues = EnumValues({
+  "comb": Source.COMB,
+  "fcst": Source.FCST,
+  "obs": Source.OBS,
+});
 
-  Map<T, String> get reverse =>
-      reverseMap = map.map((k, v) => MapEntry(v, k));
-}
-/* =========================
-   STATIONS
-========================= */
+enum Station { OPLA, VIAR }
+
+final stationValues = EnumValues({
+  "OPLA": Station.OPLA,
+  "VIAR": Station.VIAR,
+});
+
+
 
 class Stations {
-  Opla? viar;
-  Opla? opla;
+  VIAR? viar;
+  VIAR? opla;
 
-  Stations({
-    this.viar,
-    this.opla,
-  });
+  Stations({this.viar, this.opla});
 
   factory Stations.fromJson(Map<String, dynamic> json) => Stations(
-        viar: json["VIAR"] == null ? null : Opla.fromJson(json["VIAR"]),
-        opla: json["OPLA"] == null ? null : Opla.fromJson(json["OPLA"]),
+        viar: json["VIAR"] == null ? null : VIAR.fromJson(json["VIAR"]),
+        opla: json["OPLA"] == null ? null : VIAR.fromJson(json["OPLA"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -404,17 +474,17 @@ class Stations {
       };
 }
 
-class Opla {
-  int? distance;
-  double? latitude;
-  double? longitude;
-  int? useCount;
-  Station? id;
-  Station? name;
-  int? quality;
-  int? contribution;
+class VIAR {
+  dynamic distance;
+  dynamic latitude;
+  dynamic longitude;
+  dynamic useCount;
+  dynamic id;
+  dynamic name;
+  dynamic quality;
+  dynamic contribution;
 
-  Opla({
+  VIAR({
     this.distance,
     this.latitude,
     this.longitude,
@@ -425,7 +495,7 @@ class Opla {
     this.contribution,
   });
 
-  factory Opla.fromJson(Map<String, dynamic> json) => Opla(
+  factory VIAR.fromJson(Map<String, dynamic> json) => VIAR(
         distance: json["distance"],
         latitude: json["latitude"]?.toDouble(),
         longitude: json["longitude"]?.toDouble(),
@@ -448,32 +518,16 @@ class Opla {
       };
 }
 
-/* =========================
-   STATION ENUM
-========================= */
 
-enum Station {
-  OPLA,
-  VIAR,
+
+class EnumValues<T> {
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }
-
-final stationValues = EnumValues({
-  "OPLA": Station.OPLA,
-  "VIAR": Station.VIAR,
-});
-
-/* =========================
-   SOURCE ENUM (OPTIONAL)
-========================= */
-
-enum Source {
-  COMB,
-  FCST,
-  OBS,
-}
-
-final sourceValues = EnumValues({
-  "comb": Source.COMB,
-  "fcst": Source.FCST,
-  "obs": Source.OBS,
-});
