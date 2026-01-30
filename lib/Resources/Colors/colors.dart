@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static BoxDecoration buildGradientBoxDecoration() {
-    return BoxDecoration(
+    return const BoxDecoration(
       gradient: LinearGradient(
          colors: [Colors.white38,Colors.green],
          begin: Alignment.centerLeft,

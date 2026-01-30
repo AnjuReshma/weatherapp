@@ -42,14 +42,14 @@ class HomeController extends GetxController {
           break;
         }
       }
-      Get.to(HomeScreen());
+      Get.to(const HomeScreen());
     });
   }
 
   setHour(int index) {
-    Timer(Duration(milliseconds: 100), () => animator.value = true);
+    Timer(const Duration(milliseconds: 100), () => animator.value = true);
     currentIndex.value = index;
     hours.value = model.value!.days![0].hours![index];
-    Timer(Duration(milliseconds: 100), () => animator.value = false);
+    Timer(const Duration(milliseconds: 100), () => animator.value = false);
   }
 }
