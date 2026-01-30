@@ -23,7 +23,7 @@ class Location extends StatelessWidget {
                 height: 0,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
-                fontSize: 25
+                fontSize: 20
               ),
             ),
             Text(
@@ -37,8 +37,8 @@ class Location extends StatelessWidget {
         ),
         const Spacer(),
          SizedBox(
-          height: 150,
-          width: 150,
+          height: 120,
+          width: 120,
           child: Padding(padding:const EdgeInsetsGeometry.all(20.0),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
