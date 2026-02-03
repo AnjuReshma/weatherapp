@@ -38,7 +38,7 @@ class BottomList extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   color: Colors.white38,
                  ),
-                 padding: EdgeInsets.symmetric(horizontal: 20),
+                 padding: const EdgeInsets.symmetric(horizontal: 20),
                  child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,

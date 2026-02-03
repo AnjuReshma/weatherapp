@@ -30,7 +30,7 @@ class HoursList extends StatelessWidget {
                  child: Obx(() => Container(
                   height: 130,
                   width: 80,
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(
                     color: controller.compareIndex(index)
                     ? Colors.blue
