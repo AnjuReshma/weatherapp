@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ContainerList(),
                 const SizedBox(height: 4),
                 GestureDetector(
-                  onTap: ()=>Get.to(()=>const NextDays()),
+                  onTap: ()=>Get.to(()=> NextDays()),
                   child: const Padding(padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
                     children: [
